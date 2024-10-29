@@ -16,4 +16,14 @@
 
 #pragma once
 
+enum class InkayStatus {
+    Uninitialized, ///< The module isn't initialized
+    Nintendo,      ///< The module is initialized but hasn't applied any patches
+    Pretendo,      ///< The module is initialized and has applied the Pretendo patches
+
+    Error = -1     ///< Failed to retrieve the module status
+};
+
 void Inkay_Initialize(bool apply_patches);
+void Inkay_Finalize();
+InkayStatus Inkay_GetStatus();
