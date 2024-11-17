@@ -27,3 +27,5 @@ struct replacement {
 };
 
 void replaceBulk(uint32_t start, uint32_t size, std::span<const replacement> replacements);
+
+bool replace_instruction(uint32_t *inst, uint32_t orignal_value, uint32_t new_value);
