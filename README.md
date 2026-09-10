@@ -1,3 +1,16 @@
+# OpenPak nn-inkay — Wii U patches for OpenPak (Aroma)
+
+Fork of Pretendo's Inkay (GPL/AGPL as upstream). The same in-memory patches, pointed at
+OpenPak: every `*.pretendo.cc` name became the same-length `*.openpak.org` name, and
+`data/ca.pem` is the OpenPak Network CA, so the console trusts the leafs Traefik serves for
+those names. Copy `Inkay.wms` to `sd:/wiiu/environments/aroma/modules/` and the console goes to
+OpenPak; remove it and it goes back. Releases: `openpak-v*` tags.
+
+Not yet run on hardware. The server side (`nn-account`, `nn-friends`, `nn-nncs`, `nn-boss`,
+`nn-juxtaposition`, `nn-soap`) answers both the Nintendo names and these `openpak.org` names.
+
+---
+
 # Inkay - Aroma patches for Pretendo
 
 [![Pretendo network logo](https://github.com/PretendoNetwork/website/raw/master/public/assets/images/opengraph/opengraph-image.png)](https://pretendo.network)
