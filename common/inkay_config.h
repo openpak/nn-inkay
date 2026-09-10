@@ -16,6 +16,14 @@
 
 #ifndef NETWORK_BASEURL
 #define NETWORK_BASEURL "openpak.org"
+// The console resolves every *.openpak.org name to these addresses itself (dns_hooks.cpp), so
+// no public DNS record is needed. Override at build time: -DOPENPAK_SERVER_IP='"1.2.3.4"'.
+#ifndef OPENPAK_SERVER_IP
+#define OPENPAK_SERVER_IP "145.241.199.19"
+#endif
+#ifndef OPENPAK_NNCS2_IP
+#define OPENPAK_NNCS2_IP "145.241.228.207"
+#endif
 #endif
 
 #endif //INKAY_INKAY_CONFIG_H

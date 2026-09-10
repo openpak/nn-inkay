@@ -26,23 +26,25 @@
 
 std::vector<PatchedFunctionHandle> dns_patches;
 
-constexpr std::pair<const char *, const char *> dns_replacements[] = {
-        // NNCS servers
-        { "nncs1.app.nintendowifi.net", "nncs1.app." NETWORK_BASEURL },
-        { "nncs2.app.nintendowifi.net", "nncs2.app." NETWORK_BASEURL },
-};
+#include <cstring>
 
-static const char * replace_dns_name(const char *dns_name) {
-    if (!Config::connect_to_network) return dns_name;
-
-    for (auto [original, replacement] : dns_replacements) {
-        if (strcmp(original, dns_name) == 0)
-            return replacement;
+// OpenPak: the console is its own DNS for our names. Anything under NETWORK_BASEURL resolves
+// to the OpenPak box (the second NAT check server to its own host) without a public record;
+// gethostbyname/getaddrinfo take a dotted-quad literal without asking a resolver. The URL
+// strings keep their hostnames, so TLS SNI and Host headers still pick the right service.
+static const char *replace_dns_name(const char *dns_name) {
+    if (!Config::connect_to_network || !dns_name) return dns_name;
+    // The console still asks for the Nintendo NNCS names (IOSU strings, not patched by URL).
+    if (strcmp(dns_name, "nncs1.app.nintendowifi.net") == 0) return OPENPAK_SERVER_IP;
+    if (strcmp(dns_name, "nncs2.app.nintendowifi.net") == 0) return OPENPAK_NNCS2_IP;
+    const size_t len = strlen(dns_name), suffix = strlen(NETWORK_BASEURL);
+    if (len >= suffix && strcmp(dns_name + len - suffix, NETWORK_BASEURL) == 0 &&
+        (len == suffix || dns_name[len - suffix - 1] == '.')) {
+        if (strcmp(dns_name, "nncs2.app." NETWORK_BASEURL) == 0) return OPENPAK_NNCS2_IP;
+        return OPENPAK_SERVER_IP;
     }
-
     return dns_name;
 }
-
 DECL_FUNCTION(struct hostent *, gethostbyname, const char *dns_name) {
     return real_gethostbyname(replace_dns_name(dns_name));
 }
