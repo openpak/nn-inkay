@@ -1,10 +1,10 @@
 name: release
 
-# Tag openpak-v1.2.3 and this builds the plugin in the upstream toolchain image and attaches
-# Inkay.wms and the OpenPak CA to a GitHub Release. Every push still builds an artifact (ci.yml).
+# Tag v1.2.3 and this builds the plugin in the upstream toolchain image and attaches
+# Inkay.wms and the OpenPak CA to a GitHub Release. ci.yml builds the same on a manual run.
 on:
   push:
-    tags: ['openpak-v*']
+    tags: ['v*.*.*']
   workflow_dispatch:
 
 permissions:
@@ -18,7 +18,7 @@ jobs:
       - run: docker build . -t builder
       - run: docker run --rm -v ${PWD}:/app -w /app builder
       - run: ls -la *.wms || ls -la
-      - if: startsWith(github.ref, 'refs/tags/openpak-v')
+      - if: startsWith(github.ref, 'refs/tags/v')
         run: gh release create "${GITHUB_REF_NAME}" *.wms data/ca.pem --repo "${GITHUB_REPOSITORY}" --title "${GITHUB_REF_NAME}" --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
