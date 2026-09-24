@@ -1,15 +1,21 @@
 # Next session — nn-inkay
 
-Updated 2026-09-15.
+Updated 2026-09-24.
 
 Wii U loader plugin (Aroma): Pretendo's Inkay with every `*.pretendo.cc`
 swapped for a same-length `*.openpak.org` and the OpenPak Network CA, so a
 modded console goes to OpenPak. Released and current — the only open thing
 is hardware.
 
+Current status 2026-09-24: latest OpenPak tag still `openpak-v0.2.0`
+(23b207c; `v3.0.0` is upstream's). Since then only CI (release now triggers
+on `v*.*.*` tags, not `openpak-v*`) and docs commits.
+
 ## Where things stand
 
-- HEAD = `openpak-v0.2.0` (2026-09-10); 12 tags; nothing unreleased.
+- Last release `openpak-v0.2.0` (2026-09-10); no code since, only CI + docs.
+  The next release needs a `v*.*.*` tag (d33e32e) — it must not collide with
+  upstream's `v2.x`/`v3.0.0` tags already in the repo.
 - The four OpenPak commits, in order:
   1. `5c753b7` openpak.org names + OpenPak CA + `openpak-v*` release builds
   2. `1bca437` `NETWORK_BASEURL` is openpak.org too
@@ -22,7 +28,7 @@ is hardware.
   Nintendo names and the openpak.org names.
 - Never run on hardware; every green Wii U PRD row is inference until one
   does (WU-0).
-- Untracked (2026-09-15 docs pass): `CHANGELOG.md` (generated; `git log`
+- 2026-09-15 docs pass committed: `CHANGELOG.md` (generated; `git log`
   canonical), `docs/`, `prds/` stubs.
 
 ## Next steps
