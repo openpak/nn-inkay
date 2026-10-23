@@ -44,9 +44,9 @@ on `v*.*.*` tags, not `openpak-v*`) and docs commits.
 ## Pointers
 
 - README (OpenPak header: install, Docker/system build)
-- ../prds/platform-wiiu-prd.md — §4 console side, §5 WU-0
-- ../nn-account ../nn-friends (what it talks to); ../nn-sssl +
-  ../nn-sssl-dns (the hackless alternative for the same console)
+- ../../../../prds/platform-wiiu-prd.md — §4 console side, §5 WU-0
+- ../../infra/nn-account ../../infra/nn-friends (what it talks to); ../../infra/nn-sssl +
+  ../../infra/nn-sssl-dns (the hackless alternative for the same console)
 
 ## Scratch (research and throwaway work)
 
