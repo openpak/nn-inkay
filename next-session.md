@@ -1,4 +1,4 @@
-# Next session — nn-inkay
+# Next session — OpenPak Wii U Patcher
 
 Updated 2026-09-24.
 
